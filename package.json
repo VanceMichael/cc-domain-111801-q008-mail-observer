@@ -1,0 +1,16 @@
+{
+  "name": "mail-observer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "共享报关邮箱中会话观察与消失邮件的持续采集",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test --test-concurrency=1",
+    "demo": "node scripts/demo.mjs",
+    "start": "node scripts/start.mjs"
+  }
+}

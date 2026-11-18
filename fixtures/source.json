@@ -1,0 +1,60 @@
+{
+  "scope": "INBOX",
+  "resources": {
+    "/mail/INBOX": {
+      "body": {
+        "mailbox": "INBOX",
+        "messages": [
+          {
+            "id": "M100",
+            "href": "/mail/INBOX/records/M100"
+          }
+        ]
+      }
+    },
+    "/mail/INBOX/records/M100": {
+      "body": {
+        "message": "M100",
+        "mailbox": "INBOX",
+        "uid": "100",
+        "subject": "货票资料",
+        "flags": [
+          "pending"
+        ],
+        "sender": "partner@local.invalid"
+      }
+    },
+    "/mail/INBOX/relations/M100": {
+      "body": {
+        "epoch": "E1",
+        "sequence": 2,
+        "changes": [
+          {
+            "kind": "expunge",
+            "sequence": 1
+          }
+        ],
+        "window": [
+          40,
+          42
+        ]
+      }
+    }
+  },
+  "portal": {
+    "identity": "message",
+    "records": {
+      "M100": {
+        "message": "M100",
+        "mailbox": "INBOX",
+        "uid": "100",
+        "subject": "货票资料",
+        "flags": [
+          "pending"
+        ],
+        "sender": "partner@local.invalid"
+      }
+    },
+    "version": 1
+  }
+}
