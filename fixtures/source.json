@@ -1,9 +1,14 @@
 {
   "scope": "INBOX",
+  "folders": [
+    "INBOX",
+    "HANDOVER"
+  ],
   "resources": {
     "/mail/INBOX": {
       "body": {
         "mailbox": "INBOX",
+        "relation": "/mail/INBOX/relations",
         "messages": [
           {
             "id": "M100",
@@ -24,19 +29,76 @@
         "sender": "partner@local.invalid"
       }
     },
-    "/mail/INBOX/relations/M100": {
+    "/mail/INBOX/relations": {
+      "supportsSince": true,
       "body": {
+        "mailbox": "INBOX",
         "epoch": "E1",
         "sequence": 2,
+        "window": [
+          1,
+          2
+        ],
         "changes": [
           {
-            "kind": "expunge",
-            "sequence": 1
+            "kind": "arrive",
+            "sequence": 1,
+            "id": "M100",
+            "uid": "100"
+          },
+          {
+            "kind": "flags",
+            "sequence": 2,
+            "id": "M100",
+            "uid": "100",
+            "flags": [
+              "pending"
+            ]
           }
+        ]
+      }
+    },
+    "/mail/HANDOVER": {
+      "body": {
+        "mailbox": "HANDOVER",
+        "relation": "/mail/HANDOVER/relations",
+        "messages": [
+          {
+            "id": "M200",
+            "href": "/mail/HANDOVER/records/M200"
+          }
+        ]
+      }
+    },
+    "/mail/HANDOVER/records/M200": {
+      "body": {
+        "message": "M200",
+        "mailbox": "HANDOVER",
+        "uid": "200",
+        "subject": "报关交接单",
+        "flags": [
+          "handed"
         ],
+        "sender": "colleague@local.invalid"
+      }
+    },
+    "/mail/HANDOVER/relations": {
+      "supportsSince": true,
+      "body": {
+        "mailbox": "HANDOVER",
+        "epoch": "E1",
+        "sequence": 1,
         "window": [
-          40,
-          42
+          1,
+          1
+        ],
+        "changes": [
+          {
+            "kind": "arrive",
+            "sequence": 1,
+            "id": "M200",
+            "uid": "200"
+          }
         ]
       }
     }

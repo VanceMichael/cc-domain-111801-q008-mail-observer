@@ -25,7 +25,19 @@ export async function fixtureSource(fixture, options = {}) {
     const entry = resources[url.pathname];
     if (entry.delayMs) await new Promise(resolve => setTimeout(resolve, entry.delayMs));
     response.writeHead(entry.status ?? 200, { 'content-type': entry.mediaType ?? 'application/json; charset=utf-8', ...(entry.headers ?? {}) });
-    response.end(entry.bytes ?? JSON.stringify(entry.body));
+    let body = entry.bytes ?? JSON.stringify(entry.body);
+    // 会话补查：来源只返回 since 之后的变更，但代际、当前顺序号与可用窗口保持完整声明。
+    if (entry.supportsSince && url.searchParams.has('since') && entry.body && Array.isArray(entry.body.changes)) {
+      const since = Number(url.searchParams.get('since'));
+      if (Number.isSafeInteger(since) && since >= 0) {
+        const filtered = {
+          ...entry.body,
+          changes: entry.body.changes.filter(change => change.sequence > since),
+        };
+        body = JSON.stringify(filtered);
+      }
+    }
+    response.end(body);
   });
   await new Promise((resolve, reject) => {
     server.once('error', reject);

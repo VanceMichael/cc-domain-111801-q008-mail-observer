@@ -1,6 +1,6 @@
 # MailObserver
 
-MailObserver 为业务资料员提供邮箱会话补查与原文保管，已支持来源目录预览、直接记录领取、文件夹选择、稳定邮件编号、工作标记清单以及按业务范围形成收件记录。原文与领域收件结论分开保存，便于复查来源内容。
+MailObserver 为业务资料员提供共享邮箱的会话持续观察、补查与原文保管，已支持来源目录预览、直接记录领取、多文件夹选择、稳定邮件编号、邮箱代际管理、工作标记清单以及按业务范围形成报关交接清单。交接清单区分已证实的当前成员、观察中消失而未收齐的资料、两端印证的移动关系与无法确认的缺口；原文与领域结论分开保存，便于复查来源内容。采集只反映同事当前能确认的工作状态，不下载附件、不代发邮件。
 
 ## 环境与运行
 
@@ -26,4 +26,4 @@ docker run --rm --network none mail-observer:local
 
 ## 代码与来源约定
 
-`src/source.mjs` 负责来源目录与原文身份，`src/interpret.mjs` 解释当前领域记录，`src/receiving.mjs` 决定选定范围内的收件结果。`src/archive.mjs` 提供原文保管及收据落库，`src/app.mjs` 连接日常业务，`fixtures/` 与 `src/fixture-source.mjs` 提供可独立复查的本地合作源。详细字段与来源声明见 `docs/source-contract.md`。
+`src/source.mjs` 负责来源目录、会话资料位置与原文身份，`src/interpret.mjs` 解释当前领域记录与会话变更，`src/session.mjs` 依据邮箱代际和补发窗口决定增量应用或重新确认，`src/handoff.mjs` 区分当前成员、消失未收齐、移动关系与缺口，`src/receiving.mjs` 决定选定范围内的收件结果，`src/app.mjs` 的 `observeRound`/`observe` 提供单轮与持续观察。`src/archive.mjs` 提供原文保管、收据、会话依据、成员与缺口落库，`fixtures/` 与 `src/fixture-source.mjs` 提供可独立复查的本地合作源。详细字段、代际与补查语义见 `docs/source-contract.md`。
